@@ -1,3 +1,8 @@
+/**
+ * @author PRATHAMESH TIBILE
+ * @since 1-7-21
+ *  UC-2-Handle Exception if user provides invalid mood
+ */
 package Day21_Exception;
 
 public class MoodAnalyser 
@@ -16,12 +21,17 @@ public class MoodAnalyser
     }
 
     //analyseMood method
-    public String analyseMood() 
-    {
-        if (message.contains("sad")) 
+    public String analyseMood() {
+        try 
         {
-            return "SAD";
-        } else 
+            if (message.contains("sad")) 
+            {
+                return "SAD";
+            } else 
+            {
+                return "HAPPY";
+            }
+        } catch (NullPointerException npe) 
         {
             return "HAPPY";
         }
