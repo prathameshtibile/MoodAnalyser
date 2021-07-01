@@ -1,55 +1,70 @@
 package Day21_Exception;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 public class MoodAnalyserTest {
-	 //UC1-TC1.1 Add
+	 //UC1-TC1.1
     @Test
-    public  void givenIAmInSadMood_shouldReturnSad() {
+    public void givenIAmInSadMood_shouldReturnSad() throws MoodAnalyserException 
+    {
         MoodAnalyser moodAnalyser = new MoodAnalyser("I am in sad mood");
         String mood = moodAnalyser.analyseMood();
         Assert.assertEquals(mood, "SAD");
     }
 
-    //UC1-TC1.2 Add
+    //UC1-TC1.2
     @Test
-   public void givenIAmInAnyMood_shouldReturnHappy()
+    public void givenIAmInAnyMood_shouldReturnHappy() throws MoodAnalyserException
     {
         MoodAnalyser moodAnalyser = new MoodAnalyser("I am in any mood");
         String mood = moodAnalyser.analyseMood();
         Assert.assertEquals(mood, "HAPPY");
     }
 
-    //UC1-TC-1.1 Repeat Add
+    //UC1-TC-1.1 Repeat
     @Test
-    public void givenIAmInSadMood_shouldReturnHappy() 
+    public void givenIAmInSadMood_shouldReturnHappy() throws MoodAnalyserException 
     {
         MoodAnalyser moodAnalyser = new MoodAnalyser("I am in sad mood");
         String mood = moodAnalyser.analyseMood();
         Assert.assertEquals(mood, "SAD");
     }
-    
-    //UC1-TC-1.2 Repeat Add
+
+    //UC1-TC-1.2 Repeat
     @Test
-    public void givenIAmInHappyMood_shouldReturnHappy()
-    {
+    public void givenIAmInHappyMood_shouldReturnHappy() throws MoodAnalyserException {
         MoodAnalyser moodAnalyser = new MoodAnalyser("I am in happy mood");
         String mood = moodAnalyser.analyseMood();
         Assert.assertEquals(mood, "HAPPY");
     }
 
-    //UC2.1 - given Null exception return HAPPY Add
+    //UC3
     @Test
-    public void givenNullException_shouldReturnHappy() 
-    {
-        MoodAnalyser moodAnalyser = new MoodAnalyser();
-        String mood = moodAnalyser.analyseMood();
-        Assert.assertEquals(mood, "HAPPY");
-    }
-		
-	}
+   public void givenNullException_shouldInformUserToEnterValidMood() 
+   {
+        MoodAnalyser moodAnalyzer = new MoodAnalyser(null);
+        try 
+        {
+            moodAnalyzer.analyseMood();
+        } catch (MoodAnalyserException e) 
+        {
+            Assert.assertEquals(MoodAnalyserException.ExceptionType.ENTERED_NULL, e.type);
+        }
+   }
 
+    //UC3
+    @Test
+    public void givenEmpty_shouldInformUserToEnterValidMood()
+    {
+        MoodAnalyser moodAnalyzer = new MoodAnalyser("");
+        try
+        {
+            moodAnalyzer.analyseMood();
+        } catch (MoodAnalyserException e) 
+        {
+            Assert.assertEquals(MoodAnalyserException.ExceptionType.ENTERED_EMPTY, e.type);
+        }
+    }
+}
 
